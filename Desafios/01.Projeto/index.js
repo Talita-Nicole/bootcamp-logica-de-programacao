@@ -1,44 +1,68 @@
-let herois = [
-    ["Talita", 2000],
-    ["Marcos", 3000],
-    ["Julia", 6000],
-    ["Guilherme", 10000]
-]
+const get = require('prompt-sync')({sigint: true});
 
-for (let i = 0; i < herois.length; i++){
-    let nome = herois[i][0];
-    let xp = herois[i][1];
-    console.log(`Desafio Classificador de nível de Herói ${i+1}`);
-    console.log(`O Herói de nome ${nome} está no nível de ${ClassificarNivel(xp)}\n`);
+function main(){
+    console.log("-- Calculadora de partidas Rankeadas --\n");
+
+    while(true){
+        calculadora();
+        let opcao = pegarValor("\nDeseja calcular outro Rank? (1 - Sim ou 0 - Não)\n - ");
+        if(opcao == 0){
+            console.log("\nPrograma encerrado!");
+            break;
+        }
+    }
 }
 
-function ClassificarNivel (xp){
-    let nivel;
-    
-    if(xp <= 1000){
-    nivel = "Ferro";
+function calculadora(){
+    let vitorias = pegarValor("Digite o número de vitórias: ");
+    let derrotas = pegarValor("Digite o número de derrotas: ");
+    let saldo = calcularSaldo(vitorias, derrotas);
+    let nivel = calcularNivel(vitorias);
+
+    console.log(`\n-> O Herói tem de saldo de ${saldo} está no nível de ${nivel}`)
+}
+
+function pegarValor(mensagem){
+    let valor;
+
+    while(true){
+        valor = parseInt(get(mensagem));
+        
+        if(isNaN(valor) || valor < 0){
+            console.log("Digite um valor válido.\n");
+        }else{
+            break;
+        }
     }
-    else if(xp <= 2000){
-        nivel = "Bronze";
+    return valor;
+}
+
+function calcularSaldo(vitorias, derrotas){
+    return vitorias - derrotas;
+}
+
+function calcularNivel(vitorias){
+    if(vitorias < 11){
+        return "Ferro";
     }
-    else if( xp <= 5000){
-        nivel = "Prata";
+    else if(vitorias < 21){
+        return "Bronze";
     }
-    else if(xp <= 7000){
-        nivel = "Ouro";
+    else if(vitorias < 51){
+        return "Prata";
     }
-    else if(xp <= 8000){
-        nivel = "Platina";
+    else if(vitorias < 81){
+        return "Ouro";
     }
-    else if(xp <= 9000){
-        nivel = "Ascedente";
+    else if(vitorias < 91){
+        return "Diamante";
     }
-    else if(xp <= 10000){
-        nivel = "Imortal";
+    else if(vitorias < 101){
+        return "Lendário";
     }
     else{
-        nivel = "radiante";
+        return "Imortal";
     }
-
-    return nivel;
 }
+
+main();
