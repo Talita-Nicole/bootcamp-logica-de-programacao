@@ -1,0 +1,42 @@
+# node_modules - pasta com dependências do NPM
+node_modules/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+
+# arquivos de ambiente (credenciais, senhas)
+.env
+
+# arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# diretórios temporários
+tmp/
+temp/
+
+# arquivos de build
+dist/
+build/
+
+# IDEs e editores
+.vscode/
+.idea/
+
+# cache do npm/yarn
+.npm/
+.yarn/
+
+# arquivos de testes
+coverage/
+
+# arquivos do sistema de versionamento do Git
+.git/
+
+# histórico de comandos
+.history
+
+# outros
+*.swp
